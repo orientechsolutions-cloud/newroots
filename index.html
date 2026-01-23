@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Roots India</title>
+
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght,XOPQ,XTRA,YOPQ,YTDE,YTFI,YTLC,YTUC@8..144,100..1000,96,468,79,-203,738,514,712&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+    <!-- GSAP -->
+    <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+    <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+
+    <!-- Lenis -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+    <style>
+        /* ================= BASE ================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Headings */
+        h1,
+        h2,
+        h3 {
+            font-family: "Roboto", sans-serif;
+            font-weight: 900;
+        }
+
+        /* ================= HERO ================= */
+        .hero {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .hero-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 120%;
+            /* extra height for parallax */
+            object-fit: cover;
+            will-change: transform;
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .hero-text h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 3.6rem;
+            line-height: 1.2;
+            max-width: 900px;
+        }
+
+        /* ================= HERO SPLIT ================= */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            align-items: center;
+            padding: 0 40px;
+            gap: 40px;
+        }
+
+        .hero-left {
+            max-width: 620px;
+        }
+
+        .hero-title {
+            /* font-family: 'Playfair Display', serif; */
+            font-size: 3.2rem;
+            line-height: 1.15;
+            margin-bottom: 24px;
+        }
+
+        .hero-desc {
+            font-size: 1rem;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+
+        /* ================= VIDEO ================= */
+        .hero-right {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .hero-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 900px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                padding: 90px 20px 0;
+                /* 👈 TOP SPACE FOR HEADER */
+            }
+
+            .hero-right {
+                order: 1;
+                /* Video on top */
+                height: 220px;
+                margin-bottom: 30px;
+            }
+
+            .hero-left {
+                order: 2;
+                /* Text below */
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+            }
+        }
+
+
+
+        /* ================= ABOUT ================= */
+        .about {
+            min-height: 120vh;
+            padding: 120px 20px;
+            background: #000;
+            color: #fff;
+            transition: background 0.6s ease, color 0.6s ease;
+        }
+
+        .about.active {
+            background: #f5c400;
+            color: #000;
+        }
+
+        .about h2 {
+            /* font-family: 'Playfair Display', serif; */
+            font-size: 4rem;
+            margin-bottom: 30px;
+        }
+
+        .about p {
+            font-family: "Roboto", sans-serif;
+            font-size: 1.3rem;
+            max-width: 900px;
+            line-height: 1.8;
+            margin-bottom: 18px;
+
+        }
+
+        /* ================= ABOUT SPLIT ================= */
+        .about-inner {
+            max-width: 1400px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-content {
+            max-width: 640px;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            opacity: 0;
+            transform: translateX(60px);
+            will-change: transform, opacity;
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 900px) {
+            .about-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image-wrapper {
+                margin-top: 40px;
+            }
+        }
+
+
+        /* ================= WORD ANIMATION ================= */
+        .word {
+            opacity: 0;
+            display: inline-block;
+            transform: translateY(20px);
+        }
+
+        /* ================= EXPERTISE ================= */
+        .horizontal {
+            height: 100vh;
+            overflow: hidden;
+            background: #111;
+        }
+
+        .expertise {
+            padding: 20px 0 0 40px;
+            color: #fff;
+            font-size: 2rem;
+        }
+
+        .track {
+            display: flex;
+            height: 100%;
+        }
+
+        .panel {
+            min-width: 100vw;
+            padding: 80px 30px;
+        }
+
+        .panel h3 {
+            /* font-family: 'Playfair Display', serif; */
+            font-size: 3rem;
+            line-height: 1.2;
+        }
+
+        .panel p {
+            font-family: "Roboto", sans-serif;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin: 20px 0;
+            max-width: 600px;
+        }
+
+        .panel ul {
+            font-family: "Roboto", sans-serif;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin: 20px 0;
+            max-width: 600px;
+            padding-left: 30px;
+        }
+
+
+        /* === */
+
+
+        /* ================= EXPERTISE SECTION ================= */
+        .expertise-section {
+            position: relative;
+            padding: 160px 0 120px;
+            background: #000;
+            color: #fff;
+        }
+
+        /* ===== HEADING ===== */
+        .expertise-heading {
+            position: absolute;
+            top: 50px;
+            /* half overlap */
+            width: 100%;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .expertise-heading h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1;
+            display: inline-block;
+            color: #f5c400;
+            /* background: linear-gradient(to bottom,
+                    #000 0%,
+                    #000 50%,
+                    #f5c400 50%,
+                    #f5c400 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; */
+        }
+
+        /* ===== PANELS ===== */
+        .expertise-panel {
+            max-width: 1400px;
+            margin: 0 auto 140px;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 80px;
+            align-items: center;
+            min-height: 100vh;
+            /* each panel fills viewport */
+            margin-bottom: 0;
+            /* remove spacing between panels */
+        }
+
+        .panel-content h3,
+        .panel-content h4 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.3rem;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+
+        .panel-content h4 {
+            font-size: 1.8rem;
+        }
+
+        .panel-content p,
+        .panel-content li {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.2rem;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+
+        .panel-content ul {
+            padding-left: 20px;
+            margin: 16px 0;
+        }
+
+        .panel-image {
+            overflow: hidden;
+        }
+
+        .panel-image img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ===== MOBILE ===== */
+        @media (max-width: 900px) {
+            .expertise-heading h1 {
+                font-size: 2.6rem;
+            }
+
+            .expertise-panel {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .panel-image {
+                order: 1;
+                /* image on top */
+            }
+
+            .panel-content {
+                order: 2;
+            }
+        }
+
+
+
+
+
+        /* ================= HEADER ================= */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            z-index: 999;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            transition: background 0.3s ease;
+        }
+
+        .nav {
+            max-width: 1400px;
+            height: 100%;
+            margin: auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            opacity: 0.85;
+            transition: opacity 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* ================= HEADER LAYOUT ================= */
+        .nav {
+            max-width: 1400px;
+            height: 100%;
+            margin: auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo img {
+            height: 60px;
+        }
+
+        /* ================= HAMBURGER ================= */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 24px;
+            height: 2px;
+            background: #fff;
+            display: block;
+        }
+
+        /* ================= MOBILE MENU ================= */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 75%;
+            max-width: 320px;
+            height: 100vh;
+            background: #000;
+            padding: 120px 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            transform: translateX(100%);
+            z-index: 1000;
+        }
+
+        .mobile-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 16px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header" id="header">
+        <nav class="nav">
+
+            <!-- LOGO (LEFT) -->
+            <div class="logo" id="logo">
+                <img src="NRI-Logo.png" alt="New Roots India Logo">
+            </div>
+
+            <!-- DESKTOP NAV -->
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#expertise">Our Expertise</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+
+            <!-- HAMBURGER -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+        </nav>
+    </header>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#expertise">Our Expertise</a>
+        <a href="#contact">Contact Us</a>
+    </div>
+
+
+
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+        <img src="trees-5792732_1920.jpg" class="hero-img" alt="Hero background">
+
+        <div class="hero-content">
+
+            <!-- LEFT -->
+            <div class="hero-left">
+                <h1 class="hero-title">
+                    Empowering Talent.<br>
+                    Streamlining Production.
+                </h1>
+
+                <p class="hero-desc">
+                    New Roots India stands for structure behind stardom, clarity behind creativity,
+                    and support behind success. We don't just manage talent—we build foundations
+                    for lasting careers.
+                </p>
+            </div>
+
+            <!-- RIGHT -->
+            <div class="hero-right">
+                <video class="hero-video" src="hero-video.mp4" autoplay muted loop playsinline>
+                </video>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ================= ABOUT ================= -->
+    <section class="about" id="about">
+        <div class="about-inner">
+
+            <!-- LEFT: CONTENT -->
+            <div class="about-content">
+                <h2 class="reveal">About Us</h2>
+
+                <p class="reveal">
+                    At New Roots India, we exist to strengthen the ecosystem behind creativity. Founded in 2018, we were
+                    builton a simple yet powerful belief: when talent is supported by the right systems, it can truly
+                    flourish.
+                </p>
+
+                <p class="reveal">
+                    The entertainment industry is dynamic, fast-paced, and often overwhelming. Behind every successful
+                    artist or seamless production lies a complex web of contracts, schedules, finances, compliance, and
+                    operations.
+                </p>
+
+                <p class="reveal">
+                    We act as the backbone support for artists, creators, and production houses—quietly managing the
+                    business, logistics, and safeguards that allow creativity to take center stage.
+                </p>
+
+                <p class="reveal">
+                    While you focus on the art, we ensure the foundation beneath it is strong, secure, and stress-free.
+                </p>
+            </div>
+
+            <!-- RIGHT: IMAGE -->
+            <div class="about-image-wrapper">
+                <img src="about.png" alt="About New Roots India" class="about-image" />
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================= EXPERTISE ================= -->
+    <section class="expertise-section" id="expertise">
+
+        <!-- SECTION HEADING -->
+        <div class="expertise-heading">
+            <h1>Our Expertise</h1>
+        </div>
+
+        <!-- PANEL 1 -->
+        <div class="expertise-panel">
+            <div class="panel-content">
+                <h3>Talent Management</h3>
+                <p>
+                    We offer end-to-end talent management designed to nurture careers, not just manage projects.
+                </p>
+                <h4>Our services include:</h4>
+                <ul>
+                    <li>Career strategy and positioning</li>
+                    <li>Opportunity evaluation and negotiation</li>
+                    <li>Brand collaborations and endorsements</li>
+                    <li>Schedule planning and coordination</li>
+                    <li>Relationship management</li>
+                </ul>
+                <p>By handling the complexities of the industry, we empower talent to make confident decisions and focus
+                    fully on their craft.</p>
+            </div>
+
+            <div class="panel-image">
+                <img src="expertise-1.png" alt="Talent Management">
+            </div>
+        </div>
+
+        <!-- PANEL 2 -->
+        <div class="expertise-panel horizontal-reverse">
+            <div class="panel-content">
+                <h3>Legal Services</h3>
+                <p>
+                    In an industry where contracts define careers, clarity and protection are essential.
+                </p>
+                <h4>We provide:</h4>
+                <ul>
+                    <li>Contract drafting and negotiation</li>
+                    <li>Compliance guidance</li>
+                    <li>IP protection</li>
+                    <li>Risk assessment</li>
+                </ul>
+                <p>Our goal is not just legal safety, but peace of mind—so every agreement supports growth rather than
+                    limiting it.</p>
+            </div>
+
+            <div class="panel-image">
+                <img src="expertise-2.png" alt="Legal Services">
+            </div>
+        </div>
+
+        <!-- PANEL 3 -->
+        <div class="expertise-panel">
+            <div class="panel-content">
+                <h3>Stress-Free Backend Support</h3>
+                <p>
+                    We manage the operational and administrative framework that keeps everything running smoothly.
+                </p>
+                <ul>
+                    <li>Financial planning</li>
+                    <li>Payments & invoicing</li>
+                    <li>Production consulting</li>
+                    <li>Workflow optimization</li>
+                </ul>
+                <p>By streamlining backend operations, we eliminate friction, reduce stress, and create an environment
+                    where creativity can thrive without distractions.</p>
+            </div>
+
+            <div class="panel-image">
+                <img src="expertise-3.png" alt="Backend Support">
+            </div>
+        </div>
+
+    </section>
+
+
+    <script>
+        /* ================= LENIS ================= */
+        const lenis = new Lenis({
+            duration: 1.2,
+            smoothWheel: true
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        gsap.ticker.add(t => lenis.raf(t * 1000));
+        gsap.ticker.lagSmoothing(0);
+
+        /* ================= WORD SPLIT ================= */
+        document.querySelectorAll(".reveal").forEach(el => {
+            el.innerHTML = el.innerText
+                .split(" ")
+                .map(w => `<span class="word">${w}&nbsp;</span>`)
+                .join("");
+        });
+
+        /* ================= GSAP ================= */
+        gsap.registerPlugin(ScrollTrigger);
+
+        /* Hero Parallax */
+        gsap.to(".hero-img", {
+            yPercent: 20,
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+
+        /* Word-by-word reveal */
+        gsap.utils.toArray(".reveal").forEach(el => {
+            gsap.to(el.querySelectorAll(".word"), {
+                opacity: 1,
+                y: 0,
+                stagger: 0.04,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 80%"
+                }
+            });
+        });
+
+        /* About background transition */
+        ScrollTrigger.create({
+            trigger: "#about",
+            start: "top 60%",
+            onEnter: () => document.getElementById("about").classList.add("active")
+        });
+
+        /* Horizontal scroll */
+        gsap.to(".track", {
+            xPercent: -200,
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".horizontal",
+                start: "top top",
+                end: "+=300%",
+                scrub: true,
+                pin: true
+            }
+        });
+
+
+
+        /* ================= SCROLL INFLUENCE ================= */
+        ScrollTrigger.create({
+            trigger: ".hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+            onUpdate: self => {
+                scrollForce = self.progress;
+            }
+        });
+
+
+        /* ================= HEADER HIDE / SHOW ================= */
+        let lastScroll = 0;
+
+        ScrollTrigger.create({
+            start: 0,
+            end: "max",
+            onUpdate: self => {
+                const currentScroll = self.scroll();
+
+                if (currentScroll > lastScroll && currentScroll > 100) {
+                    // scrolling down → hide
+                    gsap.to("#header", {
+                        y: "-100%",
+                        duration: 0.4,
+                        ease: "power2.out"
+                    });
+                } else {
+                    // scrolling up → show
+                    gsap.to("#header", {
+                        y: "0%",
+                        duration: 0.4,
+                        ease: "power2.out"
+                    });
+                }
+
+                lastScroll = currentScroll;
+            }
+        });
+
+        /* ================= LOGO INTRO ANIMATION ================= */
+        gsap.from("#logo", {
+            y: -80,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out",
+            delay: 0.3
+        });
+        /* ================= DESKTOP NAV LINK INTRO ================= */
+        gsap.from(".nav-links li", {
+            y: -20,
+            opacity: 0,
+            stagger: 0.08,
+            duration: 0.8,
+            ease: "power3.out",
+            delay: 0.6
+        });
+
+        /* ================= MOBILE MENU ANIMATION ================= */
+
+        const hamburger = document.getElementById("hamburger");
+        const mobileMenu = document.getElementById("mobileMenu");
+
+        let menuOpen = false;
+
+        hamburger.addEventListener("click", () => {
+            menuOpen = !menuOpen;
+
+            gsap.to(mobileMenu, {
+                x: menuOpen ? "0%" : "100%",
+                duration: 0.6,
+                ease: "power3.out"
+            });
+        });
+
+        /* Close menu on link click */
+        mobileMenu.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", () => {
+                menuOpen = false;
+                gsap.to(mobileMenu, {
+                    x: "100%",
+                    duration: 0.5,
+                    ease: "power3.inOut"
+                });
+            });
+        });
+
+
+        /* ================= HERO INTRO ANIMATION ================= */
+        const heroTL = gsap.timeline({ delay: 0.3 });
+
+        heroTL
+            .from(".hero-title", {
+                y: 60,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out"
+            })
+            .from(".hero-desc", {
+                y: 40,
+                opacity: 0,
+                duration: 0.8,
+                ease: "power3.out"
+            }, "-=0.6")
+            .from(".hero-video", {
+                y: 60,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out"
+            }, "-=0.7");
+
+
+        /* ================= ABOUT IMAGE REVEAL ================= */
+        gsap.to(".about-image", {
+            opacity: 1,
+            x: 0,
+            duration: 1.2,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".about",
+                start: "top 70%",
+                once: true
+            }
+        });
+
+
+
+        /* ================= EXPERTISE PANEL ANIMATIONS ================= */
+        /* ================= PINNED EXPERTISE SECTIONS ================= */
+        gsap.utils.toArray(".expertise-panel").forEach(panel => {
+
+            const content = panel.querySelector(".panel-content");
+            const image = panel.querySelector(".panel-image img");
+
+            // Timeline for this panel
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: panel,
+                    start: "top top",
+                    end: "+=100%",        // amount of scroll while pinned
+                    scrub: true,
+                    pin: true,
+                    pinSpacing: true
+                }
+            });
+
+            // Content animation
+            tl.from(content, {
+                y: 80,
+                opacity: 0,
+                ease: "power3.out"
+            });
+
+            // Image animation
+            tl.from(image, {
+                y: 80,
+                opacity: 0,
+                ease: "power3.out"
+            }, "-=0.5");
+        });
+
+
+
+    </script>
+
+</body>
+
+</html>
