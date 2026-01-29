@@ -196,7 +196,19 @@
             .hero-content {
                 grid-template-columns: 1fr;
                 padding: 90px 20px 0;
+                gap: 0;
                 /* 👈 TOP SPACE FOR HEADER */
+            }
+
+            .hero-title {
+                position: relative;
+                top: -35px;
+                margin-bottom: 0;
+            }
+
+            .hero-desc {
+                position: relative;
+                top: -15px;
             }
 
             .hero-right {
@@ -222,7 +234,9 @@
         .about {
             min-height: 120vh;
             padding: 120px 20px;
-            background: #000;
+            background: #fff;
+            /* background: url('about-bg.jpg'); */
+            /* background-position: center; */
             color: #fff;
             transition: background 0.6s ease, color 0.6s ease;
         }
@@ -375,17 +389,11 @@
             font-family: 'Roboto', sans-serif;
             font-size: 3.5rem;
             font-weight: 900;
-            text-transform: uppercase;
+            /* text-transform: uppercase; */
             line-height: 1;
             display: inline-block;
             color: #f5c400;
-            /* background: linear-gradient(to bottom,
-                    #000 0%,
-                    #000 50%,
-                    #f5c400 50%,
-                    #f5c400 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent; */
+
         }
 
         /* .expertise-content{ 
@@ -622,16 +630,17 @@
 
         /* ================= TESTIMONIALS ================= */
         .testimonials-section {
-            padding: 160px 20px;
-            background: #000;
-            color: #fff;
+            padding: 60px 20px;
+            background: #fff;
+            color: #000;
             position: relative;
+            overflow: hidden !important;
         }
 
         .testimonials-title {
             text-align: center;
-            font-family: 'Playfair Display', serif;
-            font-size: 2.6rem;
+            /* font-family: 'Playfair Display', serif; */
+            font-size: 4rem;
             margin-bottom: 80px;
         }
 
@@ -650,10 +659,10 @@
             grid-template-columns: 0.9fr 1.1fr;
             gap: 40px;
             align-items: center;
-            background: #111;
+            background: #ccc;
             padding: 50px;
             border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
 
         .testimonial-image img {
@@ -704,6 +713,325 @@
                 font-size: 1rem;
                 line-height: 1.6;
             }
+        }
+
+
+        .waves {
+            position: absolute;
+            width: 100%;
+            height: 15vh;
+            margin-bottom: -7px;
+            /*Fix for safari gap*/
+            min-height: 100px;
+            max-height: 150px;
+            bottom: 0;
+        }
+
+        /* Animation */
+
+        .parallax>use {
+            animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
+        }
+
+        .parallax>use:nth-child(1) {
+            animation-delay: -2s;
+            animation-duration: 7s;
+        }
+
+        .parallax>use:nth-child(2) {
+            animation-delay: -3s;
+            animation-duration: 10s;
+        }
+
+        .parallax>use:nth-child(3) {
+            animation-delay: -4s;
+            animation-duration: 13s;
+        }
+
+        .parallax>use:nth-child(4) {
+            animation-delay: -5s;
+            animation-duration: 20s;
+        }
+
+        @keyframes move-forever {
+            0% {
+                transform: translate3d(-90px, 0, 0);
+            }
+
+            100% {
+                transform: translate3d(85px, 0, 0);
+            }
+        }
+
+        /*Shrinking for mobile*/
+        @media (max-width: 768px) {
+            .waves {
+                height: 40px;
+                min-height: 40px;
+            }
+        }
+
+
+
+
+        /* ================= CONTACT ================= */
+        .contact-section {
+            padding: 140px 20px;
+            background: #000;
+            color: #fff;
+        }
+
+        .contact-inner {
+            max-width: 1400px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 80px;
+            align-items: stretch;
+        }
+
+        /* ===== FORM ===== */
+        .contact-form h1 {
+            /* font-family: 'Playfair Display', serif; */
+            font-size: 4rem;
+            margin-bottom: 16px;
+        }
+
+        .contact-form p {
+            max-width: 480px;
+            margin-bottom: 40px;
+            line-height: 1.7;
+            opacity: 0.85;
+        }
+
+        .contact-form form {
+            max-width: 480px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 24px;
+        }
+
+        .field label {
+            font-size: 0.85rem;
+            margin-bottom: 6px;
+            opacity: 0.8;
+        }
+
+        .field input,
+        .field textarea {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 0;
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .field input::placeholder,
+        .field textarea::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .field input:focus,
+        .field textarea:focus {
+            border-color: #f5c400;
+        }
+
+        .contact-form button {
+            margin-top: 20px;
+            background: #f5c400;
+            color: #000;
+            border: none;
+            padding: 14px 36px;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            border-radius: 30px;
+        }
+
+        /* ===== MAP ===== */
+        .contact-map {
+            width: 100%;
+            height: 100%;
+            min-height: 420px;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .contact-map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            filter: grayscale(1) contrast(1.1);
+        }
+
+        /* ================= CONTACT ICONS ================= */
+        .detail {
+            position: relative;
+            padding-left: 28px;
+        }
+
+        .detail::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 4px;
+            width: 14px;
+            height: 14px;
+            opacity: 0.6;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .detail:nth-child(1)::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z'/%3E%3C/svg%3E");
+        }
+
+        .detail:nth-child(2)::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24a11.36 11.36 0 003.58.57c.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.07 21 3 13.93 3 5c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.46.57 3.59.11.35.03.74-.25 1.02l-2.2 2.18z'/%3E%3C/svg%3E");
+        }
+
+        .detail:nth-child(3)::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z'/%3E%3C/svg%3E");
+        }
+
+        /* ================= CONTACT ANIMATION BASE ================= */
+        .contact-form,
+        .contact-map {
+            opacity: 0;
+            transform: translateY(60px);
+        }
+
+        .contact-details {
+            padding-top: 50px;
+        }
+
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .contact-inner {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .contact-map {
+                min-height: 300px;
+            }
+        }
+
+
+
+        /* ================= FOOTER ================= */
+        .site-footer {
+            background: #fff;
+            color: #000;
+            padding: 60px 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            background: linear-gradient(315deg, rgba(101, 0, 94, 1) 3%, rgba(60, 132, 206, 1) 38%, rgba(48, 238, 226, 1) 68%, rgba(255, 25, 25, 1) 98%);
+            animation: gradient 15s ease infinite;
+            background-size: 400% 400%;
+            background-attachment: fixed;
+        }
+
+        .footer-inner {
+            max-width: 1400px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* LEFT */
+        .footer-left {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        /* SOCIAL ICONS */
+        .footer-social {
+            display: flex;
+            gap: 18px;
+        }
+
+        .footer-social a svg {
+            width: 18px;
+            height: 18px;
+            fill: #000;
+            opacity: 0.7;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .footer-social a:hover svg {
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+
+        .footer-copy {
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+
+        /* LINKS */
+        .footer-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .footer-links a {
+            color: #000;
+            text-decoration: none;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            .footer-inner {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+
+        /* ================= BACK TO TOP ================= */
+        .back-to-top {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: none;
+            background: #000;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.6) translateY(10px);
+            transition: opacity 0.3s ease;
+            z-index: 999;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Hover */
+        .back-to-top:hover {
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -770,7 +1098,19 @@
                 <video class="hero-video" src="hero-video.mp4" autoplay muted loop playsinline>
                 </video>
             </div>
-
+            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                <defs>
+                    <path id="gentle-wave"
+                        d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                </defs>
+                <g class="parallax">
+                    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+                    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+                    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+                    <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+                </g>
+            </svg>
         </div>
     </section>
 
@@ -814,7 +1154,6 @@
 
     <!-- ================= EXPERTISE ================= -->
     <section class="expertise-section" id="expertise">
-
         <!-- SECTION HEADING -->
         <div class="expertise-heading">
             <h1 class="title-text-gradient">Our Expertise</h1>
@@ -901,14 +1240,14 @@
 
 
     <section class="testimonials-section" id="testimonials">
-        <h2 class="testimonials-title">What People Say</h2>
+        <h2 class="testimonials-title title-text-gradient">What People Say</h2>
 
         <div class="testimonials-stack">
 
             <!-- TESTIMONIAL 1 -->
             <div class="testimonial-card">
                 <div class="testimonial-image">
-                    <img src="testimonial-1.jpg" alt="Client 1">
+                    <img src="testimonial-1.png" alt="Client 1">
                 </div>
                 <div class="testimonial-content">
                     <p class="quote">
@@ -922,7 +1261,7 @@
             <!-- TESTIMONIAL 2 -->
             <div class="testimonial-card">
                 <div class="testimonial-image">
-                    <img src="testimonial-2.jpg" alt="Client 2">
+                    <img src="testimonial-1.png" alt="Client 2">
                 </div>
                 <div class="testimonial-content">
                     <p class="quote">
@@ -936,7 +1275,7 @@
             <!-- TESTIMONIAL 3 -->
             <div class="testimonial-card">
                 <div class="testimonial-image">
-                    <img src="testimonial-3.jpg" alt="Client 3">
+                    <img src="testimonial-1.png" alt="Client 3">
                 </div>
                 <div class="testimonial-content">
                     <p class="quote">
@@ -950,7 +1289,7 @@
             <!-- TESTIMONIAL 4 -->
             <div class="testimonial-card">
                 <div class="testimonial-image">
-                    <img src="testimonial-4.jpg" alt="Client 4">
+                    <img src="testimonial-1.png" alt="Client 4">
                 </div>
                 <div class="testimonial-content">
                     <p class="quote">
@@ -964,7 +1303,7 @@
             <!-- TESTIMONIAL 5 -->
             <div class="testimonial-card">
                 <div class="testimonial-image">
-                    <img src="testimonial-5.jpg" alt="Client 5">
+                    <img src="testimonial-1.png" alt="Client 5">
                 </div>
                 <div class="testimonial-content">
                     <p class="quote">
@@ -977,6 +1316,131 @@
 
         </div>
     </section>
+
+    <section class="contact-section" id="contactus">
+        <div class="contact-inner">
+
+            <!-- LEFT: FORM -->
+            <div class="contact-form">
+                <h1 class="title-text-gradient">Contact Us</h1>
+                <p>
+                    Let’s talk. Whether you’re an artist, creator, or production house,
+                    we’d love to understand how we can support your journey.
+                </p>
+
+                <form>
+                    <div class="field">
+                        <label>Name</label>
+                        <input type="text" placeholder="Your full name" required />
+                    </div>
+
+                    <div class="field">
+                        <label>Email</label>
+                        <input type="email" placeholder="you@example.com" required />
+                    </div>
+
+                    <div class="field">
+                        <label>Phone</label>
+                        <input type="tel" placeholder="+91 XXXXX XXXXX" />
+                    </div>
+
+                    <div class="field">
+                        <label>Message</label>
+                        <textarea rows="4" placeholder="Tell us about your requirement"></textarea>
+                    </div>
+
+                    <button type="submit">Send Message</button>
+                </form>
+
+                <!-- CONTACT DETAILS -->
+                <div class="contact-details">
+                    <div class="detail">
+                        <h4>Address</h4>
+                        <p>
+                            New Roots India<br>
+                            Mumbai, Maharashtra<br>
+                            India
+                        </p>
+                    </div>
+
+                    <div class="detail">
+                        <h4>Phone</h4>
+                        <p>
+                            <a href="tel:+919999999999">+91 99999 99999</a>
+                        </p>
+                    </div>
+
+                    <div class="detail">
+                        <h4>Email</h4>
+                        <p>
+                            <a href="mailto:contact@newrootsindia.com">
+                                contact@newrootsindia.com
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- RIGHT: MAP -->
+            <div class="contact-map">
+                <iframe src="https://www.google.com/maps?q=Mumbai,India&output=embed" allowfullscreen loading="lazy">
+                </iframe>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+
+            <!-- LEFT -->
+            <div class="footer-left">
+                <div class="footer-social">
+                    <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M22 12a10 10 0 10-11.6 9.9v-7h-2v-3h2V9.5c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.6-1.3 1.2V11h2.3l-.4 3h-1.9v7A10 10 0 0022 12z" />
+                        </svg>
+                    </a>
+
+                    <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm5 5a5 5 0 100 10 5 5 0 000-10zm6.5-.9a1.1 1.1 0 11-2.2 0 1.1 1.1 0 012.2 0z" />
+                        </svg>
+                    </a>
+
+                    <a href="https://wa.me/919999999999" target="_blank" aria-label="WhatsApp">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M20 3.9A10 10 0 004 18.1L3 22l4-1a10 10 0 0013-9.1A10 10 0 0020 3.9zm-8 15a8 8 0 01-4.1-1.1l-.3-.2-2.4.6.6-2.3-.2-.3A8 8 0 1112 19z" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="footer-copy">
+                    © <span id="year"></span> New Roots India. All rights reserved.
+                </div>
+            </div>
+
+            <!-- RIGHT -->
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#expertise">Our Expertise</a>
+                <a href="#contact">Contact</a>
+            </div>
+
+        </div>
+
+        <!-- BACK TO TOP -->
+        <button class="back-to-top" id="backToTop" aria-label="Back to top">
+            ↑
+        </button>
+    </footer>
+
+
 
 
 
@@ -1306,6 +1770,81 @@
             }
         });
 
+
+        /* ================= CONTACT SECTION ANIMATION ================= */
+        const contactTL = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".contact-section",
+                start: "top 50%",
+                toggleActions: "play none none none"
+            }
+        });
+
+        /* LEFT SIDE FIRST (FORM + DETAILS) */
+        contactTL.to(".contact-form", {
+            opacity: 1,
+            y: 0,
+            duration: 2,
+            ease: "power3.out"
+        });
+
+        /* THEN MAP */
+        contactTL.to(".contact-map", {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power3.out"
+        }, "-=0.6"); // slight overlap for smooth flow
+
+
+        /* ================= FOOTER ANIMATION ================= */
+        gsap.to(".site-footer", {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".site-footer",
+                start: "top 90%"
+            }
+        });
+
+
+        /* ================= FOOTER UTILITIES ================= */
+
+        // Auto year
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        // Back to top animation
+        const backToTop = document.getElementById("backToTop");
+
+        ScrollTrigger.create({
+            start: 300,
+            onUpdate: self => {
+                if (self.scroll() > 300) {
+                    backToTop.classList.add("show");
+                    gsap.to(backToTop, {
+                        scale: 1,
+                        y: 0,
+                        duration: 0.4,
+                        ease: "power3.out"
+                    });
+                } else {
+                    backToTop.classList.remove("show");
+                    gsap.to(backToTop, {
+                        scale: 0.6,
+                        y: 10,
+                        duration: 0.3,
+                        ease: "power3.in"
+                    });
+                }
+            }
+        });
+
+        // Smooth scroll to top
+        backToTop.addEventListener("click", () => {
+            lenis.scrollTo(0, { duration: 1.2 });
+        });
 
 
 
